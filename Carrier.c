@@ -39,6 +39,8 @@ Ship createCarrier(void){
     Abilities abilities=createCarrierAbilities();
     Carrier carrier={CARRIER_HEALTH,CARRIER_SHIELD,MAX_INTERCEPTORS};
     AirShipType airShipType = CARRIER;
-    Ship ship={abilities,carrier,airShipType};
+    Ships ships;
+    ships.carrier = carrier;
+    Ship ship = {abilities, ships, airShipType};
     return ship;
 }
