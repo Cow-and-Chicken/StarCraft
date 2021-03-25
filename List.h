@@ -12,8 +12,8 @@ typedef struct List{
 
 List createList(Ship data);
 void addShip(Ship data,List *list);
-Ship *getCurr(void);
-void goToLast(void);
-Ship *getLast(void);
-Ship *getMoveCurr(void);
-void removeShip(Ship *ptr);
+Ship *getCurr(List *list);
+void goToLast(List *list);
+Ship *getLast(List *list);
+Ship *getMoveCurr(List *list);
+void removeShip(List *list);

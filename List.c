@@ -18,12 +18,51 @@ void addShip(Ship data, List *list){
     list->last=p;
     
 }
-Ship *getCurr(void);
-void goToLast(void);
-Ship *getLast(void);
-Ship *getMoveCurr(void);
-void removeShip(Ship *ptr);
-int main()
-{
-    return 0;
+Ship *getCurr(List *list){
+     return &list->current->data;
 }
+void goToLast(List *list){
+    list->current=list->last;
+}
+Ship *getLast(List *list){
+    return &list->last->data;
+}
+Ship *getMoveCurr(List *list){
+    Ship *ptr=&list->current->data;
+    if(list->current->next){
+        list->current=list->current->next;
+    }else{
+        list->current=list->last;
+    }
+    return ptr;
+}
+void removeShip(List *list){
+    Node *ptr=list->last;
+    list->last=list->last->next;
+    free(ptr);
+}
+int main(){
+    Ship viking = createViking();
+    Ship carrier = createCarrier();
+    Ship phoenix = createPhoenix();
+    Ship battlecruser=createCruser();
+    Ship *v = NULL;
+    Ship *c = NULL;
+    Ship *p = &phoenix;
+    Ship *b = &battlecruser;
+    List protosFleet=createList(viking);
+    addShip(carrier,&protosFleet);
+    goToLast(&protosFleet);
+    c=getMoveCurr(&protosFleet);
+    v=getMoveCurr(&protosFleet);
+    printf("\n");
+    printf("%d\n",c->ships.carrier.hp);
+    printf("\n");
+    printf("%d\n",v->ships.viking.hp);
+    return 0;
+ 
+
+}
+
+
+ 
