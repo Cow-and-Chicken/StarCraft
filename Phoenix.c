@@ -32,6 +32,8 @@ Ship createPhoenix(void){
     Abilities abilities = createPhoenixAbilities();
     Phoenix phoenix = {PHOENIX_HEALTH, PHOENIX_SHIELD};
     AirShipType airShipType = PHOENIX;
-    Ship ship = {abilities, phoenix, airShipType};
+    Ships ships;
+    ships.phoenix = phoenix;
+    Ship ship = {abilities, ships, airShipType};
     return ship;
 }
