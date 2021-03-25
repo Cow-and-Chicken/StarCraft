@@ -5,10 +5,14 @@ enum AirShipDefines {
   ZERO=0,
 
   BATTLE_CRUSER_HEALTH = 450,
-  BATTLE_BRUSER_DAMAGE = 40,
+  BATTLE_CRUSER_DAMAGE = 40,
+  DEFAULT_CRUSER_MULTIPLIER=1,
+  YAMATO_CANNON_MULTIPLIER=5,
+  BATTLE_CRUSER_START_ROUND=1,
 
   VIKING_HEALTH = 150,
   VIKING_DAMAGE = 15,
+  VIKING_DAMAGE_VS_PHOENIX = 30,
 
   CARRIER_HEALTH = 200,
   CARRIER_SHIELD = 150,
@@ -31,7 +35,7 @@ enum CarrierDefines {
 };
 
 enum BattleCruserDefines {
-  YAMATO_CANNON_LOADING_TURNS = 4
+  YAMATO_CANNON_LOADING_TURNS = 5
 };
 
 /*Forward declaration of: The ship struct that contains shipType and it's abilities*/
