@@ -1,3 +1,6 @@
+#ifndef SHIP_H_
+#define SHIP_H_
+
 #include "Abilities.h"
 #include "Carrier.h"
 #include "Defines.h"
@@ -26,3 +29,5 @@ Ship createCruser(void);
 Ship createViking(void);
 Ship createPhoenix(void);
 Ship createCarrier(void);
+
+#endif /* SHIP_H_ */

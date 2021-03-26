@@ -8,7 +8,7 @@ void attackPhoenix(Ship *attacker,Ship *attacked){
 }
 
 /* Function called in the attackShipName function of the attacker that tells 
-how much damage it dealed so this function can decrement the needed values */
+how much damage it dealt so this function can decrement the needed values */
 void getDMGPhoenix(Ship *ship, int dmg){
     if(ship->ships.phoenix.shield>dmg){
         ship->ships.phoenix.shield-=dmg;
