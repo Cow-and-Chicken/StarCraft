@@ -1,14 +1,19 @@
+#ifndef SHIP_H_
+#define SHIP_H_
+
 #include "Abilities.h"
 #include "Carrier.h"
 #include "Defines.h"
 #include "Phoenix.h"
 #include "Viking.h"
+#include "BattleCruser.h"
 
 
 union Ships{
     Carrier carrier;
     Phoenix phoenix;
     Viking viking;
+    BattleCruser battleCruser;
 };
 
 struct Ship{
@@ -20,7 +25,9 @@ struct Ship{
     AirShipType type;
 };
 
-Ship createCruiser(void);
+Ship createCruser(void);
 Ship createViking(void);
 Ship createPhoenix(void);
 Ship createCarrier(void);
+
+#endif /* SHIP_H_ */

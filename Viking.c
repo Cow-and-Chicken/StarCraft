@@ -36,24 +36,5 @@ Ship createViking(void){
     Ship ship = {abilities, ships, airShipType};
     return ship;
 }
-int main(){
-    Ship viking = createViking();
-    Ship carrier = createCarrier();
-    Ship phoenix = createPhoenix();
 
-    Ship *v = &viking;
-    Ship *c = &carrier;
-    Ship *p = &phoenix;
-
-    printf("Carier`s shield: %d\n", carrier.ships.carrier.shield);
-    printf("Phoenix`s shield: %d\n", phoenix.ships.phoenix.shield);
-    printf("\n\n");
-    viking.abilities.attack(v, c);
-    viking.abilities.attack(v, p);
-    printf("Carier`s shield: %d\n", carrier.ships.carrier.shield);
-    printf("Phoenix`s shield: %d\n", phoenix.ships.phoenix.shield);
-
-    return 0;
-
-
-}
+    
