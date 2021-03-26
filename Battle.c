@@ -1,48 +1,59 @@
 #include "Battle.h"
 
+int counter=0;
+
 void battle(void){
 
     enum Victory victoryFlag;
-    List *protossFleet = generateProtossFleet();
-    List *terranFleet = generateTerranFleet();
-    goToLast(terranFleet);
+    List terranFleet = generateTerranFleet();
+    List protossFleet = generateProtossFleet();
+    
+
+    
     while(1){
-        if(processTurn(terranFleet, protossFleet)){
+        if(processTurn(&terranFleet, &protossFleet)){
             victoryFlag = TERRAN_VICTORY;
             break;
         }
-        if(processTurn(protossFleet, terranFleet)){
+        if(processTurn(&protossFleet, &terranFleet)){
             victoryFlag = PROTOSS_VICTORY;
             break;
         }
 
     }
+
+    printVictory(victoryFlag);
 }
 
 
 int processTurn(List *attackingFleet, List *targetFleet){
+    
+    
     goToLast(attackingFleet);
+    goToLast(targetFleet);
     Ship *target = getLast(targetFleet);
     Ship *attacker = NULL;
     
     while(listHasCurr(attackingFleet)){
-        attacker = getMoveCurr(attackingFleet);
         
+        attacker = getCurr(attackingFleet);
         attacker->abilities.attack(attacker, target);
-        printf("Start\n");
-        
         if(!checkTarget(target)){
             shipDestoyed(attacker, getCurrIndex(attackingFleet), getCurrIndex(targetFleet));
             removeShip(targetFleet);
-            target = getLast(targetFleet);
+            goToLast(targetFleet);
+            moveNext(targetFleet);
+            target = getCurr(targetFleet);
             if(target == NULL){
                 return ONE;
             }
         }
         attacker->abilities.specialAbility(attacker);
-        printf("Start\n");
+        
+        moveNext(attackingFleet);
     }
-   
+    
+    counter++;
     printShip(target, getCurrIndex(targetFleet));
     return ZERO;
 }
@@ -106,20 +117,61 @@ int checkTarget(Ship *ship){
     return ONE;
 }
 
-List *generateTerranFleet(void){
-    List terran = createList(createCruser());
-    List *terranFleet = &terran;
-    return terranFleet;
+List generateTerranFleet(void){
+    char inputChar = getchar();
+    List terran;
+    if(inputChar=='b'){
+        terran=createList();
+    }else if(inputChar=='v'){
+        terran=createList();
+    }
+    while((inputChar=getchar())!='\n'){
+        if(inputChar=='b'){
+            addShip(createCruser(),&terran);
+        }else if(inputChar=='v'){
+            addShip(createViking(),&terran);
+        }
+    }
+
+    return terran;
 }
 
-List *generateProtossFleet(void){
-    List protoss = createList(createCarrier());
-    List *protossFleet = &protoss;
-    return protossFleet;
+List generateProtossFleet(void){
+    char inputChar = getchar();
+    List protoss;
+    if(inputChar=='c'){
+        protoss=createList();
+    }else if(inputChar=='p'){
+        protoss=createList();
+    }
+    while((inputChar=getchar())!='\n'){
+        if(inputChar=='c'){
+            addShip(createCarrier(),&protoss);
+        }else if(inputChar=='p'){
+            addShip(createPhoenix(),&protoss);
+        }
+    }
+    return protoss;
 
 }
 void shipDestoyed(Ship *ship, int shipIndex, int targerIndex){
-    printf("1\n");
+    switch(ship->type){
+        case VIKING:
+            printf("Viking with ID: %d killed enemy airship with ID: %d\n", shipIndex,targerIndex);
+            break;
+        case BATTLE_CRUSER:
+            printf("BattleCruser with ID: %d killed enemy airship with ID: %d\n", shipIndex,targerIndex);
+            break;
+        case PHOENIX:
+            printf("Phoenix with ID: %d killed enemy airship with ID: %d\n", shipIndex,targerIndex);
+            break;
+        case CARRIER:
+            printf("Carrier with ID: %d killed enemy airship with ID: %d\n", shipIndex,targerIndex);
+            break;
+        default:
+            printf("Something went wrong at destroy!\n");
+            break;
+    }
 }
 void printTerranShip(Ship *ship, int shipIndex){
     switch(ship->type){

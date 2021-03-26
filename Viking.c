@@ -1,20 +1,28 @@
-#include "Ship.h"
+#include "Viking.h"
 
-void attackViking(Ship *attacker, Ship *attacked)
+int attackViking(Ship *attacker, List *targetFleet)
 {
     int dmg;
-    if(attacked->type == PHOENIX){
+    Ship *target = getLast(targetFleet);
+    if(target->type == PHOENIX){
         dmg = VIKING_DAMAGE_VS_PHOENIX;
     }
     else{
         dmg = VIKING_DAMAGE;
     }
-    attacked->abilities.getDMG(attacked,dmg);
+    if(target->abilities.getDMG(target, dmg)){
+        return ONE;
+    }
+    return ZERO;
 }
 
-void getDMGViking(Ship *ship, int dmg)
+int getDMGViking(Ship *ship, int dmg)
 {
     ship->ships.viking.hp -= dmg;
+    if(ship->ships.viking.hp < ONE){
+        return ONE;
+    }
+    return ZERO;
 }
 
 void specialAbilityViking(Ship *ship)
@@ -24,7 +32,7 @@ void specialAbilityViking(Ship *ship)
 
 Abilities createVikingAbilities(void)
 {
-    Abilities abilities = {&attackViking, &getDMGViking, &specialAbilityViking};
+    Abilities abilities = {&attackViking, &getDMGViking, &specialAbilityViking, &printViking};
     return abilities;
 }
 Ship createViking(void){
@@ -33,8 +41,25 @@ Ship createViking(void){
     AirShipType airShipType = VIKING;
     Ships ships;
     ships.viking = Viking;
-    Ship ship = {abilities, ships, airShipType};
+    Ship ship = {abilities, ships, &printVikingStatus, airShipType};
     return ship;
 }
+void printVikingStatus(Ship *ship){
+    printf("%d health left.", ship->ships.viking.hp);
+}
+void printViking(Ship *ship){
+    printf("Viking");
+}
 
+int main(void){
+
+    Ship phoenix = createViking();
+    Ship *c =&phoenix;
+    c->printShipStatus(c);
+    c->abilities.getDMG(c,45);
+    printf("\n");
+    c->printShipStatus(c);
+    c->abilities.printShip(c);
     
+    return 0;
+}

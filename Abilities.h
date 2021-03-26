@@ -6,9 +6,10 @@
 #include "Defines.h"
 
 struct Abilities{
-    void (*attack)(Ship *attacker,Ship *attacked);
-    void (*getDMG)(Ship *ship,int dmg);
+    int (*attack)(Ship *attacker,List *targetFleet);
+    int (*getDMG)(Ship *ship,int dmg);
     void (*specialAbility)(Ship *ship);
+    void (*printShip)(Ship *ship);
 };
 
 #endif /* ABILITIES_H_ */

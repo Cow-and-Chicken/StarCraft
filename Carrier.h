@@ -1,17 +1,16 @@
 #ifndef CARRIER_H_
 #define CARRIER_H_
-#include "Abilities.h"
 
-struct Carrier{
-    int hp;
-    int shield;
-    unsigned short drones;
-};
+#include "List.h"
 
-void attackCarrier(Ship *attacker,Ship *attacked);
-void getDMGCarrier(Ship *ship,int dmg);
-void droneCheckCarrier(Ship *ship);
+
+
+int attackCarrier(Ship *attacker,List *targetFleet);
+int getDMGCarrier(Ship *ship,int dmg);
 void specialAbilityCarrier(Ship *ship);
+void printCarrierStatus(Ship *ship);
+void printCarrier(Ship *ship);
+void droneCheckCarrier(Ship *ship);
 Abilities createCarrierAbilities(void);
 
 #endif /* CARRIER_H_ */

@@ -8,7 +8,8 @@ enum Victory{
 
 enum BOOL{
   ZERO=0,
-  ONE = 1
+  ONE = 1,
+  MINUS_ONE=-1
 };
 
 enum AirShipDefines {
@@ -67,5 +68,11 @@ typedef struct Phoenix Phoenix;
 
 /*Forward declaration of: Carrier shipType*/
 typedef struct Carrier Carrier;
+
+/*Forward declaration of: the list*/
+typedef struct List List;
+
+/*Forward declaration of: the list nodes*/
+typedef struct Node Node;
 
 #endif /* DEFINES_H_ */

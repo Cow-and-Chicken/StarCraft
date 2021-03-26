@@ -1,75 +1,106 @@
 #include "List.h"
 
 /* Function that creates a List, we'll use to create a ProtosFleet List and a TerranFleet List */
-List createList(Ship data){
-    Node *curr = malloc(sizeof(Node));
-    curr->data.abilities = data.abilities;
-    curr->data.ships = data.ships;
-    curr->data.type = data.type;
-    curr->index = ZERO;
-    curr->next=NULL;
-    Node *last = curr;
-    List list = {*curr,curr,last};
+List createList(){
+    Node *new = malloc(sizeof(Node));
+    new->itemIndex = MINUS_ONE;
+    new->nextItem=NULL;
+    new->prevItem=NULL;
+    List list = {*new,new,new,new};
     return list;
 }
-/* Return current ship index */
+
+/*Add a ship to the list*/
+void addShip(Ship data,List *list){
+    Node *new = malloc(sizeof(Node));
+    new->itemIndex=list->lastItem->itemIndex+ONE;
+    new->prevItem=list->lastItem;
+    new->nextItem=NULL;
+
+    new->shipData.abilities=data.abilities;
+    new->shipData.printShipStatus=data.printShipStatus;
+    new->shipData.ships=data.ships;
+    new->shipData.type=data.type;
+
+    list->lastItem->nextItem=new;
+
+    list->lastItem=new;
+}
+
+
+Ship *getCurrShip(List *list){
+    return &list->currentItem->shipData;
+}
+
+
 int getCurrIndex(List *list){
-    return list->current->index;
-}
-/* Adding a ship to the specific list */
-void addShip(Ship data, List *list){
-    Node *p=malloc(sizeof(Node));
-    p->data.abilities=data.abilities;
-    p->data.ships=data.ships;
-    p->data.type=data.type;
-    p->index = list->last->index + ONE;
-    p->next=list->last;
-    list->last=p;
-    
+    return list->currentItem->itemIndex;
 }
 
-/* Getting the ship we are currently on */
-Ship *getCurr(List *list){
-    return &list->current->data;
-}
 
-/* Setting the current ship we are on to be the last one */
 void goToLast(List *list){
-    list->current=list->last;
+    list->currentItem=list->lastItem;
 }
 
-/* Getting the last ship of the list */
+
+void goToFirst(List *list){
+    list->currentItem=list->firstItem;
+}
+
+
 Ship *getLast(List *list){
-    return &list->last->data;
+    return &list->lastItem->shipData;
 }
 
-/* Getting the ship we are currently on and then moving the current ship to the one it's pointing to */
-Ship *getMoveCurr(List *list){
-    if(listHasCurr(list)){
-        Ship *ptr=&list->current->data;
-        list->current=list->current->next;
-        return ptr;
-    }else{
-        return NULL;
+
+Ship *getFirst(List *list){
+    return &list->firstItem->shipData;
+}
+
+
+void removeLastShip(List *list){
+    if(list->lastItem->itemIndex>MINUS_ONE){
+        Node *tempNode=list->lastItem;
+        list->lastItem=list->lastItem->prevItem;
+        list->lastItem->nextItem=NULL;
+        list->currentItem=list->lastItem;
+        free(tempNode);
     }
 }
 
-/* Removing the last ship , and setting the next one to be the new last */
-void removeShip(List *list){
-    if(list->last->next){
-        Node *ptr=list->last;
-        list->last=list->last->next;
-        free(ptr);
-    }    
-}
-/*Checks if Curr is an item*/
-int listHasCurr(List *list){
-    if(list->current!=NULL){
+
+int listHasNext(List *list){
+    if(list->currentItem->nextItem!=NULL){
+        return ONE;
+    }
+    return ZERO;
+}   
+
+int listHasPrev(List *list){
+    if(list->currentItem->itemIndex>MINUS_ONE){
         return ONE;
     }
     return ZERO;
 }
 
+void moveToNext(List *list){
+    if(list->currentItem->nextItem!=NULL){
+        list->currentItem=list->currentItem->nextItem;
+    }
+}
 
+
+void moveToPrev(List *list){
+    if(list->currentItem->itemIndex>MINUS_ONE){
+        list->currentItem=list->currentItem->prevItem;
+    }   
+}
+
+int listIsEmpty(List *list){
+    if(list->lastItem->itemIndex=MINUS_ONE){
+        return ONE;
+    }
+    return ZERO;
+}
 
  

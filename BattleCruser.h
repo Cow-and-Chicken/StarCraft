@@ -1,16 +1,13 @@
 #ifndef BATTLECRUSER_H_
 #define BATTLECRUSER_H_
 
-#include "Abilities.h"
+#include "List.h"
 
-struct BattleCruser{
-    int hp;
-    unsigned short round;
-};
-
-void attackCruser(Ship *attacker,Ship *attacked);
-void getDMGCruser(Ship *ship,int dmg);
+int attackCruser(Ship *attacker,List *targetFleet);
+int getDMGCruser(Ship *ship,int dmg);
 void specialAbilityCruser(Ship *ship);
+void printCruserStatus(Ship *ship);
+void printCruser(Ship *ship);
 Abilities createCruserAbilities(void);
 
 #endif /* BATTLECRUSER_H_ */

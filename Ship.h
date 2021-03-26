@@ -2,12 +2,26 @@
 #define SHIP_H_
 
 #include "Abilities.h"
-#include "Carrier.h"
-#include "Defines.h"
-#include "Phoenix.h"
-#include "Viking.h"
-#include "BattleCruser.h"
 
+struct BattleCruser{
+    int hp;
+    unsigned short round;
+};
+
+struct Viking{
+    int hp;
+};
+
+struct Phoenix{
+    int hp;
+    int shield;
+};
+
+struct Carrier{
+    int hp;
+    int shield;
+    unsigned short drones;
+};
 
 union Ships{
     Carrier carrier;
@@ -21,6 +35,8 @@ struct Ship{
     Abilities abilities;
     /*Ship stats: hp, shield...*/
     Ships ships;
+    /*Prints the ship status*/
+    void (*printShipStatus)(Ship *ship);
     /*Type of ship*/
     AirShipType type;
 };
