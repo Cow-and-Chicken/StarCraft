@@ -52,7 +52,7 @@ Ship *getMoveCurr(List *list){
 
 /* Removing the last ship , and setting the next one to be the new last */
 void removeShip(List *list){
-    if(listHasCurr(list)){
+    if(list->last->next){
         Node *ptr=list->last;
         list->last=list->last->next;
         free(ptr);
@@ -97,7 +97,6 @@ int main(){
     }
     goToLast(terranFleet);
     printf("\n\n");
-    attacker->abilities.attack(attacker,target);
     goToLast(terranFleet);
     while(listHasCurr(terranFleet)){
         Ship *p=getMoveCurr(terranFleet);
