@@ -1,0 +1,3 @@
+D:/starcraft/CMake/build/CMakeFiles/rebuild_cache.dir
+D:/starcraft/CMake/build/CMakeFiles/starcraft.dir
+D:/starcraft/CMake/build/CMakeFiles/edit_cache.dir
