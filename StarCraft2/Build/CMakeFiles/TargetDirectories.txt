@@ -1,0 +1,3 @@
+/home/nikolay/Code-Academy/StarCraft/StarCraft/StarCraft2/Build/CMakeFiles/rebuild_cache.dir
+/home/nikolay/Code-Academy/StarCraft/StarCraft/StarCraft2/Build/CMakeFiles/edit_cache.dir
+/home/nikolay/Code-Academy/StarCraft/StarCraft/StarCraft2/Build/CMakeFiles/starcraft.dir
