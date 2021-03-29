@@ -62,10 +62,10 @@ Abilities createVikingAbilities(void)
 Ship createViking(void)
 {
     Abilities abilities = createVikingAbilities();
-    Viking Viking = {VIKING_HEALTH};
+    Viking viking = {VIKING_HEALTH};
     AirShipType airShipType = VIKING;
     Ships ships;
-    ships.viking = Viking;
+    ships.viking = viking;
     Ship ship = {abilities, ships, &printVikingStatus, airShipType};
     return ship;
 }
