@@ -1,6 +1,7 @@
-#include "../include/Battle.h"
+#include "Battle.h"
 
-int main(){
+int main()
+{
     battle();
     return 0;
 }

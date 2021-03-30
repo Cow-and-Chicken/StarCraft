@@ -1,7 +1,7 @@
 #ifndef LIST_H_
 #define LIST_H_
 
-#include "../include/Ship.h"
+#include "Ship.h"
 
 typedef struct Node{
     Ship shipData;
@@ -27,8 +27,6 @@ void goToFirst(List *list);
 Ship *getLast(List *list);
 Ship *getFirst(List *list);
 void removeLastShip(List *list);
-int listHasNext(List *list);
-int listHasPrev(List *list);
 void moveToNext(List *list);
 void moveToPrev(List *list);
 int listIsEmpty(List *list);

@@ -1,42 +1,65 @@
 #ifndef SHIP_H_
 #define SHIP_H_
 
-#include "../include/Abilities.h"
+#include "Abilities.h"
 
-struct BattleCruser{
-    int hp;
+/* Creates the BattleCruser struct */
+struct BattleCruser
+{
+    Ship1 ship;
+
     unsigned short round;
 };
-
-struct Viking{
-    int hp;
+typedef int shield;
+/* Creates the Viking struct */
+struct Viking
+{
+    Ship1 ship;
 };
 
-struct Phoenix{
-    int hp;
-    int shield;
+/* Creates the Phoenix struct */
+struct Phoenix
+{
+    shipProttos ship;
 };
 
-struct Carrier{
-    int hp;
-    int shield;
+/* Creates the Carrier struct */
+struct Carrier
+{
+    shipProttos ship;
     unsigned short drones;
 };
 
-union Ships{
+typedef struct Ship1{
+    int hp;
+} Ship1;
+
+typedef struct shipProttos{
+    int shield;
+    Ship1 hp;
+}shipProttos;
+
+/* Creates the union that encompasses all ship types */
+union Ships
+{
     Carrier carrier;
     Phoenix phoenix;
     Viking viking;
     BattleCruser battleCruser;
 };
 
-struct Ship{
+/* "Assemles" a complete ship */
+struct Ship
+{
     /*Ship abilities*/
     Abilities abilities;
+
     /*Ship stats: hp, shield...*/
     Ships ships;
+
     /*Prints the ship status*/
     void (*printShipStatus)(Ship *ship);
+
     /*Type of ship*/
     AirShipType type;
 };

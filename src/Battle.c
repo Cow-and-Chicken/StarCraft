@@ -1,5 +1,7 @@
-#include "../include/Battle.h"
+#include "Battle.h"
 
+
+/* The main battle function that handles the battle and its result */
 void battle(void)
 {
 
@@ -35,6 +37,7 @@ void battle(void)
     printVictory(victoryFlag);
 }
 
+/* Handles the actual turns of the battle */
 int processTurn(List *attackingFleet, List *targetFleet)
 {
     goToLast(targetFleet);
@@ -66,14 +69,15 @@ int processTurn(List *attackingFleet, List *targetFleet)
     return ZERO;
 }
 
+/* Prints the ship ID and its status */
 void printShip(Ship *ship, int shipIndex)
 {
-
     printf(" with ID: %d has ", shipIndex);
     ship->printShipStatus(ship);
     printf("\n");
 }
 
+/* Prints the final result of the battle */
 void printVictory(enum Victory victoryFlag)
 {
     switch (victoryFlag)
@@ -90,6 +94,7 @@ void printVictory(enum Victory victoryFlag)
     }
 }
 
+/* Fills the terran fleet List */
 void generateTerranFleet(List *terranFleet)
 {
     char inputChar;
@@ -107,6 +112,7 @@ void generateTerranFleet(List *terranFleet)
     }
 }
 
+/* Fills the protoss fleet List */
 void generateProtossFleet(List *protossFleet)
 {
     char inputChar;
@@ -123,8 +129,10 @@ void generateProtossFleet(List *protossFleet)
         }
     }
 }
+
+/* Prints the destroyer ship with its ID and the target ID */
 void shipDestoyed(Ship *ship, int shipIndex, int targetIndex)
 {
-    ship->abilities.printShip(ship);
+    ship->abilities.printShip();
     printf(" with ID: %d killed enemy airship with ID: %d\n", shipIndex, targetIndex);
 }

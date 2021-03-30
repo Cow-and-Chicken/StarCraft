@@ -1,7 +1,7 @@
-#include "../include/Viking.h"
-#include "../include/Phoenix.h"
-#include "../include/Carrier.h"
-#include "../include/BattleCruser.h"
+#include "Viking.h"
+#include "Phoenix.h"
+#include "Carrier.h"
+#include "BattleCruser.h"
 
 void battle(void);
 int processTurn(List *attackingFleet, List *targetFleet);
